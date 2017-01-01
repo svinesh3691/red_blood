@@ -41,6 +41,12 @@ app.config(['$stateProvider','$urlRouterProvider',
                   controller: 'register'
               })
 
+              .state('app.verify', {
+                url: '/verify/:Flag',
+                  templateUrl: 'tpl/modules/profile/verify.html',
+                  controller: 'verify'
+              })
+
 
               .state('app.profile', {
                   url: '/profile',

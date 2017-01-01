@@ -23,6 +23,8 @@ app.controller('login', ['$scope','seven','$location','services',
        $scope.data.uthi_password = "";
 
        $scope.login = function() {
+                        seven.showIndicator();
+
        		var validations = validator();
        		if(validations) {
        			services.master('uthiram/login',$scope.data).then(function(res){
@@ -31,6 +33,7 @@ app.controller('login', ['$scope','seven','$location','services',
        					return false;
        				}
        				if(res.data.status == 200) {
+                                    seven.hideIndicator();
        					localStorage.uthir_logged = 1;
        					localStorage.uthir_user = JSON.stringify(res.data.details);
        					$location.path( "/app/home" );
@@ -72,13 +75,16 @@ app.controller('register', ['$scope','seven','$state','services',
        		var validations = validator();
        		if(validations) {
        			services.master('uthiram/register',$scope.data).then(function(res){
-       				if(res.status == 400) {
+       				if(res.data.status == 400) {
        					alert('This email ID is already registered with us');
        					return false;
        				}
-       				if(res.status == 200) {
+       				if(res.data.status == 200) {
        					alert('Registeration successful');
-       					return false;
+       					localStorage.uthir_logged = 1;
+                                    localStorage.uthir_user = JSON.stringify(res.data.details);
+                                    $location.path( "/app/verify/1" );
+
        				}
        			})
        		}
@@ -106,4 +112,51 @@ app.controller('register', ['$scope','seven','$state','services',
        }
 }]);
 
+
+
+
+// Verify controller
+app.controller('verify', ['$scope','seven','$location','services','$stateParams',
+    function ( $scope , seven , $location , services,$stateParams) {
+
+      $scope.flag = $stateParams.Flag;
+      $scope.code = "";
+      var self = JSON.parse(localStorage.uthir_user);
+       $scope.verify = function() {
+                  var validations = validator();
+                  if(validations) {
+                        services.master('uthiram/verify',{'code':$scope.code, 'uthi_user': self['uthi_id']}).then(function(res){
+                              if(res.data.status == 400) {
+                                    alert('Wrong Code!!!');
+                                    return false;
+                              }
+                              if(res.data.status == 200) {
+                                    alert('Account Sucessfully verified!');
+                                    localStorage.uthir_logged = 1;
+                                    localStorage.uthir_user = JSON.stringify(res.data.details);
+                                    if($scope.flag == 1) {
+                                          $location.path( "/app/home" );
+                                    } else if($scope.flag == 2) {
+                                          $location.path( "/app/profile" );
+                                    } else if($scope.flag == 3) {
+                                          $location.path( "/app/donors" );
+                                    }
+                              }
+                        })
+                  }
+       }
+
+
+
+       function validator(){
+
+                  return true;
+       }
+
+       $scope.close = function(){
+            $location.path( "/app/home" );
+            
+            
+       }
+}]);
 

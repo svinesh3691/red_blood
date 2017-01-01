@@ -1,0 +1,78 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+      </div>
+      <div class="center">Verify Account </div>
+      <div class="right">
+          <a ng-click="close()" class="link icon-only  no-ripple"><i class="fa fa-close"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="card">
+      <div class="card-header">Verification Code</div>
+      <div class="card-content">
+        <div class="card-content-inner"> 
+          <form ng-submit="verify()">
+              <div class="list-block inputs-list">
+                <ul>
+                  
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner"> 
+                          <span ng-if="flag==1">
+                            Registeration completed! But You must verify your account to get full started with our app. We have sent you a four digit pin to your email ID .Please use that code to verify your account.
+                          </span>
+
+                           <span ng-if="flag==2">
+                            You can access your profile only after verifying your account.
+                            Please enter the verification code we sent you to your email
+                          </span>
+
+
+
+                           <span ng-if="flag==3">
+
+                            You can register donorsonly after verifying your account.
+                            Please enter the verification code we sent you to your email
+
+                          </span>
+                        
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner"> 
+                        <div class="item-input item-input-field">
+                          <input type="text" ng-model="code">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+
+                 
+                </ul>
+              </div>
+
+              <p style="margin-top:36px;" class="buttons-row">
+                  <button type="submit" class="button button-raised button-fill color-blue no-ripple">Verify Account</button>
+              </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>

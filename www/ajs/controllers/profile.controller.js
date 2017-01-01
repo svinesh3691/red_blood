@@ -1,9 +1,15 @@
 // Profile Controller
-app.controller('profile', ['$scope','seven','$state','services',
-    function ( $scope, seven, $state, services ) {
+app.controller('profile', ['$scope','seven','$state','services','$location',
+    function ( $scope, seven, $state, services , $location) {
             
+
             seven.hideIndicator();
             $scope.data = JSON.parse(localStorage.uthir_user);
+               console.log($scope.data.uthi_activated);             
+            if($scope.data.uthi_activated == 0){
+                $location.path( "/app/verify/2" );
+                return false; 
+            }  
             if($scope.data['uthi_donor'] == 2) {
                 $scope.donored = true; 
             }
@@ -12,13 +18,16 @@ app.controller('profile', ['$scope','seven','$state','services',
 
 
 // Donors Controller
-app.controller('donors', ['$scope','seven','$state','services',
-    function ( $scope, seven, $state, services ) {
+app.controller('donors', ['$scope','seven','$state','services','$location',
+    function ( $scope, seven, $state, services , $location) {
             
             seven.hideIndicator();
 
             $scope.data = JSON.parse(localStorage.uthir_user);
-            
+            if($scope.data.uthi_activated == 0){
+                $location.path( "/app/verify/3" );
+                return false; 
+            }  
             if($scope.data['uthi_donor'] == 2)  $scope.url_flag = 3; 
             else $scope.url_flag = 2; 
 
