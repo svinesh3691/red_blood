@@ -1,0 +1,79 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+        <a class="link open-panel icon-only no-ripple"><i class="icon icon-bars"></i></a>
+      </div>
+      <div class="center">Register</div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-content-inner"> 
+          <form ng-submit="register()">
+              <div class="list-block inputs-list">
+                <ul>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-name"></i></div>
+                      <div class="item-inner"> 
+                        <div class="item-title floating-label">Your name</div>
+                        <div class="item-input item-input-field">
+                          <input type="text" ng-model="data.uthi_name">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-email"></i></div>
+                      <div class="item-inner"> 
+                        <div class="item-title floating-label">E-mail</div>
+                        <div class="item-input item-input-field">
+                          <input type="email" ng-model="data.uthi_email">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner"> 
+                        <div class="item-title floating-label">Password</div>
+                        <div class="item-input item-input-field">
+                          <input type="password" ng-model="data.uthi_password">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner"> 
+                        <div class="item-title floating-label">Repeat Password</div>
+                        <div class="item-input item-input-field">
+                          <input type="password"  ng-model="data.uthi_cpassword">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <p style="margin-top:36px;" class="buttons-row">
+                  <button type="submit" class="button button-raised button-fill color-blue no-ripple">Register</button>
+              </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

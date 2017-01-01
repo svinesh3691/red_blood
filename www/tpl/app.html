@@ -1,0 +1,90 @@
+<div class="panel panel-left panel-cover">
+  <div class="view navbar-fixed">
+    <div class="pages">
+      <div data-page="panel-left" class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center">Uthiram APP</div>
+          </div>
+        </div>
+        <div class="page-content">
+          
+          <div class="content-block-title">Logo section</div>
+          <div class="list-block">
+            <ul>
+              <li><a href="#/app/home" class="item-link close-panel  no-ripple">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">Home</div>
+                    </div>
+                  </div></a></li>
+
+              <li><a href="#/app/about" class="item-link close-panel  no-ripple">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"> About us </div>
+                  </div>
+                </div></a></li>
+
+              <li ng-if="!logged"><a href="#/app/login" class="item-link close-panel  no-ripple">
+                  <div class="item-content">
+                    <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                    <div class="item-inner">
+                      <div class="item-title">Login</div>
+                    </div>
+                  </div></a></li>
+              <li ng-if="!logged"><a href="#/app/register" class="item-link close-panel  no-ripple">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">Register</div>
+                    </div>
+                  </div></a></li>
+
+              <li ng-if="logged"><a href="#/app/profile" class="item-link close-panel  no-ripple">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title"> My Profile </div>
+                    </div>
+                  </div></a></li>
+
+
+              <li ng-if="logged"><a href="#/app/donors" class="item-link close-panel  no-ripple">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title"> Registered Donors </div>
+                    </div>
+                  </div></a></li>
+
+
+
+
+
+              <li><a href="#/app/contact" class="item-link close-panel  no-ripple">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"> Contact us </div>
+                  </div>
+                </div></a></li>
+
+                <li><a ng-click="logout()" class="item-link close-panel  no-ripple">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"> Logout </div>
+                  </div>
+                </div></a></li>
+
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="views">
+    <div class="view view-main">
+        <div ui-view  class="pages navbar-fixed">
+        </div>
+    </div>
+</div>

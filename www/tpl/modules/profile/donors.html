@@ -1,0 +1,54 @@
+<style type="text/css">
+.donor-card .item-title {
+      margin-left: 1px;
+      font-size: 18px;
+}
+.donor-card .badge {
+      font-size: 14px;
+}
+
+</style>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+        <a class="link open-panel icon-only no-ripple"><i class="icon icon-bars"></i></a>
+      </div>
+      <div class="center">Registered Donors </div>
+      <div class="right">
+        <a href="#/app/donor_registeration/{{url_flag}}/2" class="link icon-only no-ripple"><i class="icon icon-plus"></i></a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+      <div ng-repeat="donor in donors" class="card donor-card list-block">
+          <div class="card-header item-inner">
+            <div class="item-title">{{donor.uthi_name}} <span ng-if="data.uthi_id == donor.uthi_id">(Me)</span>  </div>
+            <div class="item-after"><span class="badge bg-green">{{donor.blood_group}}</span></div>
+
+          </div>
+          <div class="card-content"> 
+            <div class="card-content-inner">
+              <p> {{donor.uthi_phone_one}} ,  {{donor.uthi_phone_two}} </p>
+              <div class="ks-facebook-date"></div>
+              <p class="color-gray">Last donated on Monday 26-May-2016 </p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#/app/donor_edit/{{donor.uthi_id}}" class="button color-indigo no-ripple">Edit</a>
+            <a href class="button color-indigo no-ripple">View</a>
+          </div>
+      </div>
+
+
+
+
+
+  </div>
+
+
+
+</div>

@@ -1,0 +1,147 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+        <a class="link open-panel icon-only no-ripple"><i class="icon icon-bars"></i></a>
+      </div>
+      <div class="center">My Profile</div>
+      <div class="right">
+          <a href="#/app/profile_edit" class="link icon-only  no-ripple"><i class="fa fa-pencil"></i></a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="card">
+      <div class="card-header">Profile Details</div>
+      <div class="card-content"> 
+        <div class="list-block media-list">
+          <ul>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Name</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.uthi_name}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Email</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.uthi_email}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Password</div>
+                <div class="item-title-row">
+                  <div class="item-title"><a href="#/app_changepass">Change Password</a></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer" ng-if="!donored"> 
+                  <!-- <span>January 20, 2015</span><span>5 comments</span> -->
+                  <a href="#/app/donor_registeration/1/1" type="submit" class="button button-raised button-fill color-blue no-ripple"  ng-if="!donored">Become a Donor Now</a>
+
+      </div>
+    </div>
+
+    <div ng-if="donored" class="card">
+      <div class="card-header">Donor Details</div>
+      <div class="card-content"> 
+        <div class="list-block media-list">
+          <ul>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Blood Group</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.blood_group}}</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">DOB</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.uthi_dob}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Gender</div>
+                <div class="item-title-row">
+                  <div class="item-title" ng-if="data.uthi_gender == 1">Male</div>
+                  <div class="item-title"  ng-if="data.uthi_gender == 2">Female</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Phone 1</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.uthi_phone_one}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Phone 2</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.uthi_phone_two}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Temporary state</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.temp_state_name}}</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Temporary District</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.temp_dist_name}}</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Temporary State</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.perm_state_name}}</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Permanent District</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.perm_dist_name}}</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+
+
+
+  </div>
+</div>
