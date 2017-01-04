@@ -21,7 +21,8 @@ app.controller('home', ['$scope','seven','$state','services',
 app.controller('filter', ['$scope','seven','$state','services','$location',
     function ( $scope, seven, $state, services, $location ) {
             $scope.sd = JSON.parse(localStorage.states);
-            var filters = JSON.parse(localStorage.filters);
+            var filters;
+            if(localStorage.filters) filters = JSON.parse(localStorage.filters);
             $scope.filter = (filters) || {};
             console.log($scope.filter);
 
@@ -37,12 +38,11 @@ app.controller('filter', ['$scope','seven','$state','services','$location',
             }
 
             $scope.$watch('filter.state', function(NewValue, OldValue) {
-                $scope.loadTempDist();
-                setTimeout(function(){
-                        $scope.filter.district = filters.district || '';
-                        $scope.$apply();
-                        console.log($scope.filter);
-                },111)
+                console.log(NewValue);
+                if(NewValue) {
+                        $scope.loadTempDist();
+                }
+                
             }, true);
 
 
