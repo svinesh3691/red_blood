@@ -1,0 +1,95 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+      </div>
+      <div class="center"> Filter </div>
+      <div class="right">
+          <a href="#/app/donor_list" class="link icon-only  no-ripple"><i class="fa fa-close"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="card">
+      <!-- <div class="card-header">Verification Code</div> -->
+      <div class="card-content">
+        <div class="card-content-inner"> 
+              <div class="list-block inputs-list">
+                <ul>
+   
+
+                  
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state"> 
+                          <div class="item-title label">State</div>
+                          <div class="item-input item-input-field not-empty-state">
+                            <select ng-change="loadTempDist()" ng-model="filter.state">
+                              <option ng-repeat="s in sd" ng-selected="s.state_id == filter.state" value="{{s.state_id}}">{{s.state_name}}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+
+
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state"> 
+                          <div class="item-title label">District</div>
+                          <div class="item-input item-input-field not-empty-state">
+                            <select  ng-model="filter.district">
+                              <option ng-repeat="s in temp_districts" ng-selected="s.dist_id == filter.district"  value="{{s.dist_id}}">{{s.dist_name}}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+
+
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state"> 
+                          <div class="item-title label">Blood Group</div>
+                          <div class="item-input item-input-field not-empty-state">
+                              <select ng-model="filter.blood_group">
+                                <option value="1">A +ive</option>
+                                <option value="2">A -ive</option>
+                                <option value="3">B +ive</option>
+                                <option value="4">B -ive</option>
+                                <option value="5">AB +ive</option>
+                                <option value="6">AB -ive</option>
+                                <option value="7">O +ive</option>
+                                <option value="8">O -ive</option>
+                                
+                                
+
+                              </select>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+
+                 
+                </ul>
+              </div>
+
+              <p style="margin-top:36px;" class="buttons-row">
+                  <button ng-click="filterNow()" class="button button-raised button-fill color-red no-ripple">Filter</button>
+              </p>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>

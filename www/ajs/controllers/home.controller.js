@@ -14,3 +14,37 @@ app.controller('home', ['$scope','seven','$state','services',
             })            
 
 }]);
+
+
+
+// Home Controller
+app.controller('filter', ['$scope','seven','$state','services','$location',
+    function ( $scope, seven, $state, services, $location ) {
+            $scope.sd = JSON.parse(localStorage.states);
+            var filters = JSON.parse(localStorage.filters);
+            $scope.filter = (filters) || {};
+            console.log($scope.filter);
+
+            $scope.filterNow = function () {
+                console.log($scope.filter);
+                localStorage.filters = JSON.stringify($scope.filter);
+                $location.path( "/app/donor_list" );
+            }  
+
+
+            $scope.loadTempDist = function() {
+                $scope.temp_districts = $scope.sd[parseInt($scope.filter.state) - 1].districts;
+            }
+
+            $scope.$watch('filter.state', function(NewValue, OldValue) {
+                $scope.loadTempDist();
+                setTimeout(function(){
+                        $scope.filter.district = filters.district || '';
+                        $scope.$apply();
+                        console.log($scope.filter);
+                },111)
+            }, true);
+
+
+}]);
+

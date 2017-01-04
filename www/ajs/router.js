@@ -25,8 +25,18 @@ app.config(['$stateProvider','$urlRouterProvider',
 
               .state('app.home', {
                   url: '/home',
-                  templateUrl: 'tpl/modules/home.html',
-                  controller: 'home'
+                  templateUrl: 'tpl/welcome.html',
+              })
+
+              .state('app.about', {
+                  url: '/about',
+                  templateUrl: 'tpl/modules/about.html',
+              })
+
+
+              .state('app.contact', {
+                  url: '/contact',
+                  templateUrl: 'tpl/modules/contact.html',
               })
 
               .state('app.login', {
@@ -59,6 +69,20 @@ app.config(['$stateProvider','$urlRouterProvider',
                   templateUrl: 'tpl/modules/profile/donors.html',
                   controller: 'donors'
               })
+
+              .state('app.donor_list', {
+                  url: '/donor_list',
+                  templateUrl: 'tpl/modules/home.html',
+                  controller: 'home'
+              })
+
+
+              .state('app.filter', {
+                  url: '/filter',
+                  templateUrl: 'tpl/modules/filter.html',
+                  controller: 'filter'
+              })
+
               
               .state('app.donor_registeration', {
                 url: '/donor_registeration/:Flag/:From',
