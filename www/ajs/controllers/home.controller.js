@@ -11,7 +11,11 @@ app.controller('home', ['$scope','seven','$state','services',
             services.master('uthiram/donors_search',{}).then(function(res){
                 $scope.donors =  res.data.donors;
             	seven.hideIndicator();
-            })            
+            })           
+
+            $scope.callNow = function(num){
+                document.location.href = 'tel:'+num;
+            }  
 
 }]);
 
