@@ -23,6 +23,17 @@
   </div>
 
   <div  class="page-content">
+    <div ng-if="nores">
+        <div class="card donor-card list-block">
+            <div class="card-content"> 
+              <div class="card-content-inner">
+                Sorry no results found for the following search!
+                
+
+              </div>
+            </div>
+        </div>
+    </div>
     <div infinite-scroll="getData()" infinite-scroll-distance="10">
         <div ng-repeat="donor in donors" class="card donor-card list-block">
             <div class="card-header item-inner">

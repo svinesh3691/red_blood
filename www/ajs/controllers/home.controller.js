@@ -9,16 +9,30 @@ app.controller('home', ['$scope','seven','$state','services',
 			if(localStorage.uthir_user) {
 					$scope.data = JSON.parse(localStorage.uthir_user);
 			}
-			var filter = JSON.parse(localStorage.filters);
+            if(localStorage.filters) {
+                var filter = JSON.parse(localStorage.filters);
+                $scope.shw = true;
+            }
+            else{
+                $scope.shw = false;
+                filter = {};  
+            } 
+            console.log($scope.shw);
+            console.log($scope.filter_bld_grp);
             filter['start'] = 1;
             filter['limit'] = 3;
             services.master('uthiram/donors_search',filter).then(function(res){
+                seven.hideIndicator();
+
+                if(!res.data.donors) {
+                    $scope.nores = true;
+                    return false;
+                }
                 res.data.donors.forEach(function(item){
                         $scope.donors.push(item);
-                    })
+                })
                 $scope.getting  = false;
-                $scope.spinner      = true; 
-                seven.hideIndicator();
+                $scope.spinner  = true; 
             })           
 
             $scope.callNow = function(num){
@@ -61,12 +75,25 @@ app.controller('filter', ['$scope','seven','$state','services','$location',
             $scope.filter = (filters) || {};
             console.log($scope.filter);
 
+            if(localStorage.filters) {
+                
+                $scope.shw = true;
+            }
+            else{
+                $scope.shw = false;
+            } 
+
             $scope.filterNow = function () {
                 console.log($scope.filter);
                 localStorage.filters = JSON.stringify($scope.filter);
                 $location.path( "/app/donor_list" );
             }  
 
+            $scope.clearNow = function(){
+                delete localStorage.filters;
+                $scope.filters = {};
+                $location.path( "/app/donor_list" );
+            }
 
             $scope.loadTempDist = function() {
                 $scope.temp_districts = $scope.sd[parseInt($scope.filter.state) - 1].districts;
