@@ -1,21 +1,52 @@
 // Home Controller
 app.controller('home', ['$scope','seven','$state','services',
     function ( $scope, seven, $state, services ) {
-
+            $scope.donors       = [];
+            $scope.completed    = false; 
+            $scope.getting      = true; 
+            $scope.spinner      = false; 
             seven.showIndicator();
 			if(localStorage.uthir_user) {
 					$scope.data = JSON.parse(localStorage.uthir_user);
 			}
-			
-
-            services.master('uthiram/donors_search',{}).then(function(res){
-                $scope.donors =  res.data.donors;
-            	seven.hideIndicator();
+			var filter = JSON.parse(localStorage.filters);
+            filter['start'] = 1;
+            filter['limit'] = 3;
+            services.master('uthiram/donors_search',filter).then(function(res){
+                res.data.donors.forEach(function(item){
+                        $scope.donors.push(item);
+                    })
+                $scope.getting  = false;
+                $scope.spinner      = true; 
+                seven.hideIndicator();
             })           
 
             $scope.callNow = function(num){
                 document.location.href = 'tel:'+num;
             }  
+
+            $scope.getData = function(){
+                console.log('bla');
+                if($scope.completed) return false;
+                if($scope.getting) return false;
+                $scope.getting = true;
+                console.log('alb');
+                filter['start']++;
+                filter['start'] = filter['start'] * 2;
+                services.master('uthiram/donors_search',filter).then(function(res){
+
+                    if(!res.data.donors) {
+                        $scope.completed = true;
+                        $scope.getting = false;
+                        return false;
+                    }
+                    res.data.donors.forEach(function(item){
+                        $scope.donors.push(item);
+                    })
+                    $scope.getting = false;
+                })   
+            }
+
 
 }]);
 

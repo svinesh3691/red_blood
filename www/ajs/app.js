@@ -1,6 +1,7 @@
 /*Creating Module*/
 var app = angular.module('app', [
-    'ui.router'
+    'ui.router',
+    'infinite-scroll'
 ]);
 
 
