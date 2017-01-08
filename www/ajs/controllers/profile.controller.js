@@ -211,12 +211,11 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
 app.controller('profile_edit', ['$scope','seven','$stateParams','services','$location',
     function ( $scope, seven, $stateParams, services ,$location) {
             seven.showIndicator();
-            console.log('Profile Edit Controller');
             $scope.data = {};
             var self = JSON.parse(localStorage.uthir_user);
             var my_id = self.uthi_id; 
             $scope.sd = JSON.parse(localStorage.states);
-            
+
 
             services.master('uthiram/edit_donor',{'id':my_id}).then(function(res){
                     
@@ -226,8 +225,9 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
                         $scope.donor = false; 
                         if(parseInt(res.data.details['uthi_donor']) == 2)  $scope.donor = true; 
                         $scope.data = res.data.details;
-                        $scope.temp_districts = $scope.sd[parseInt($scope.data.uthi_temp_state) - 1].districts;
-                        $scope.perm_districts = $scope.sd[parseInt($scope.data.uthi_perm_state) - 1].districts;
+
+                       if($scope.data.uthi_temp_state != "0") $scope.temp_districts = $scope.sd[parseInt($scope.data.uthi_temp_state) - 1].districts;
+                       if($scope.data.uthi_perm_state != "0")  $scope.perm_districts = $scope.sd[parseInt($scope.data.uthi_perm_state) - 1].districts;
                         seven.hideIndicator();
 
                     }
@@ -236,6 +236,8 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
 
 
             $scope.update = function(){
+                
+                seven.showIndicator();
                 console.log($scope.data);
                 // for(var k in $scope.data) {
                 //     if($scope.data[k] == "" && k != "uthi_self" && k != "uthi_email" && k != "uthi_password") {
@@ -247,11 +249,13 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
 
                 services.master('uthiram/update_profile',$scope.data).then(function(res){
                     if(res.data.status == 400) {
+                        seven.hideIndicator();
                         alert('This email ID is already registered with us');
                         return false;
                     }
                     if(res.data.status == 200) {
-                            localStorage.uthir_user = JSON.stringify(res.data.details);
+                        seven.hideIndicator();
+                        localStorage.uthir_user = JSON.stringify(res.data.details);
                         $location.path( "/app/profile" );
 
                     }

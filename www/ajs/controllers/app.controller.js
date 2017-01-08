@@ -62,8 +62,8 @@ app.controller('login', ['$scope','seven','$location','services',
 
 
 // Register controller
-app.controller('register', ['$scope','seven','$state','services',
-    function ( $scope , seven , $state , services) {
+app.controller('register', ['$scope','seven','$state','services','$location',
+    function ( $scope , seven , $state , services, $location) {
 
        $scope.data = {};
        $scope.data.uthi_name = "";
@@ -72,14 +72,18 @@ app.controller('register', ['$scope','seven','$state','services',
        $scope.data.uthi_cpassword = "";
 
        $scope.register = function() {
+                  seven.showIndicator();
+
        		var validations = validator();
        		if(validations) {
        			services.master('uthiram/register',$scope.data).then(function(res){
        				if(res.data.status == 400) {
+                                    seven.hideIndicator();
        					alert('This email ID is already registered with us');
        					return false;
        				}
        				if(res.data.status == 200) {
+                                    seven.hideIndicator();
        					alert('Registeration successful');
        					localStorage.uthir_logged = 1;
                                     localStorage.uthir_user = JSON.stringify(res.data.details);
@@ -123,14 +127,18 @@ app.controller('verify', ['$scope','seven','$location','services','$stateParams'
       $scope.code = "";
       var self = JSON.parse(localStorage.uthir_user);
        $scope.verify = function() {
+                  seven.showIndicator();
+
                   var validations = validator();
                   if(validations) {
                         services.master('uthiram/verify',{'code':$scope.code, 'uthi_user': self['uthi_id']}).then(function(res){
                               if(res.data.status == 400) {
+                                    seven.hideIndicator();
                                     alert('Wrong Code!!!');
                                     return false;
                               }
                               if(res.data.status == 200) {
+                                    seven.hideIndicator();
                                     alert('Account Sucessfully verified!');
                                     localStorage.uthir_logged = 1;
                                     localStorage.uthir_user = JSON.stringify(res.data.details);

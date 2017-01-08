@@ -27,9 +27,8 @@
         <div class="card donor-card list-block">
             <div class="card-content"> 
               <div class="card-content-inner">
-                Sorry no results found for the following search!
+                  Sorry no results found for your search!
                 
-
               </div>
             </div>
         </div>
@@ -48,7 +47,7 @@
                 <p> <i class="fa fa-map-marker" style="font-size:1.6em"></i>&nbsp;&nbsp;&nbsp; {{donor.temp_dist_name}} ,{{donor.temp_state_name}}  </p>
                 <p> <i class="fa fa-mobile fa-lg" style="font-size:1.9em"></i>&nbsp;&nbsp;&nbsp; {{donor.uthi_phone_one}} ,  {{donor.uthi_phone_two}} </p>
                 <div class="ks-facebook-date"></div>
-                <p class="color-gray"> <i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp; Last donated on Monday 26-May-2016 </p>
+                <p class="color-gray"> <i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp; Last donated on {{donor.uthi_lbd | date}} </p>
               </div>
             </div>
             <div class="card-footer">
