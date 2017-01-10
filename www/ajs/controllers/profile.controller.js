@@ -67,20 +67,17 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 
             $scope.show_form = false;
             $scope.show_options = false;
-            $scope.readonly = false;
 
 
             
 
             if($stateParams.Flag==1) {
-                $scope.show_form = true;
             	var self = JSON.parse(localStorage.uthir_user);
                 $scope.data.uthi_self = true;
                 $scope.data.uthi_referrer  = self.uthi_id;
             	$scope.data.uthi_id        = self.uthi_id;
                 $scope.data.uthi_name      = self.uthi_name;
             	$scope.data.uthi_mail      = self.uthi_email;
-            $scope.readonly = true;
 
                 $scope.uthi_donor_options = [
                         {
