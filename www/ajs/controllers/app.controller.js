@@ -91,7 +91,10 @@ app.controller('register', ['$scope','seven','$state','services','$location',
 
        				}
        			})
-       		}
+       		} else {
+                                    seven.hideIndicator();
+                              
+                  }
        }
 
 

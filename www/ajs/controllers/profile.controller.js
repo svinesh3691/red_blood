@@ -10,7 +10,7 @@ app.controller('profile', ['$scope','seven','$state','services','$location',
                 $location.path( "/app/verify/2" );
                 return false; 
             }  
-            if($scope.data['uthi_donor'] == 2) {
+            if($scope.data['uthi_donor'] == 2 || $scope.data['uthi_donor'] == 3) {
                 $scope.donored = true; 
             }
             
@@ -63,11 +63,16 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
             $scope.data.uthi_temp_dist = "";
             $scope.data.uthi_perm_state = "";
             $scope.data.uthi_perm_dist = "";
+            $scope.data.uthi_donor = "";
 
             $scope.show_form = false;
             $scope.show_options = false;
+            $scope.readonly = false;
 
-            if($stateParams.Flag==1){
+
+            
+
+            if($stateParams.Flag==1) {
                 $scope.show_form = true;
             	var self = JSON.parse(localStorage.uthir_user);
                 $scope.data.uthi_self = true;
@@ -75,6 +80,18 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
             	$scope.data.uthi_id        = self.uthi_id;
                 $scope.data.uthi_name      = self.uthi_name;
             	$scope.data.uthi_mail      = self.uthi_email;
+            $scope.readonly = true;
+
+                $scope.uthi_donor_options = [
+                        {
+                            'uthi_donor_options_id' : 2, 
+                            'uthi_donor_options_value' : "Available" 
+                        },
+                        {
+                            'uthi_donor_options_id' : 3, 
+                            'uthi_donor_options_value' : "Not Available" 
+                        },
+                ];
             }  
 
             if($stateParams.Flag==2){
@@ -85,12 +102,23 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
                 var self = JSON.parse(localStorage.uthir_user);
                 $scope.data.uthi_referrer = self.uthi_id;
                 $scope.show_form = true;
+
+                $scope.uthi_donor_options = [
+                        {
+                            'uthi_donor_options_id' : 12, 
+                            'uthi_donor_options_value' : "Available" 
+                        },
+                        {
+                            'uthi_donor_options_id' : 13, 
+                            'uthi_donor_options_value' : "Not Available" 
+                        },
+                ];
             }  
             
 
 
             $scope.register = function(){
-                console.log($scope.data);
+                seven.showIndicator();
                 for(var k in $scope.data) {
                     if($scope.data[k] == "" && k != "uthi_self") {
                         alert('All Fields are required!'); 
@@ -100,6 +128,7 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 
 
                 services.master('uthiram/register_donor',$scope.data).then(function(res){
+                seven.hideIndicator();
                     if(res.data.status == 400) {
                         alert('This email ID is already registered with us');
                         return false;
@@ -149,13 +178,42 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
             services.master('uthiram/edit_donor',{'id':$stateParams.Id}).then(function(res){
                     
                     if(res.data.status == 200) {
-                        console.log(res.data);
+
+
                         res.data.details.uthi_lbd = new Date(res.data.details.uthi_lbd); 
                         res.data.details.uthi_dob = new Date(res.data.details.uthi_dob); 
 
                         $scope.data = res.data.details;
                         $scope.temp_districts = $scope.sd[parseInt($scope.data.uthi_temp_state) - 1].districts;
                         $scope.perm_districts = $scope.sd[parseInt($scope.data.uthi_perm_state) - 1].districts;
+                        
+
+                        if( res.data.details.uthi_id ==  res.data.details.uthi_referrer ) {
+
+                            $scope.uthi_donor_options = [
+                                    {
+                                        'uthi_donor_options_id' : 2, 
+                                        'uthi_donor_options_value' : "Available" 
+                                    },
+                                    {
+                                        'uthi_donor_options_id' : 3, 
+                                        'uthi_donor_options_value' : "Not Available" 
+                                    },
+                            ];
+
+                        } else {
+                            $scope.uthi_donor_options = [
+                                    {
+                                        'uthi_donor_options_id' : 12, 
+                                        'uthi_donor_options_value' : "Available" 
+                                    },
+                                    {
+                                        'uthi_donor_options_id' : 13, 
+                                        'uthi_donor_options_value' : "Not Available" 
+                                    },
+                            ];
+                        }
+
                         seven.hideIndicator();
 
                     }
@@ -164,7 +222,6 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
 
 
             $scope.update = function(){
-                console.log($scope.data);
                 for(var k in $scope.data) {
                     if($scope.data[k] == "" && k != "uthi_self" && k != "uthi_email" && k != "uthi_password") {
                         alert('All Fields are required!'); 
@@ -172,16 +229,20 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
                     }
                 }
 
+                        seven.showIndicator();
 
                 services.master('uthiram/update_donor',$scope.data).then(function(res){
                     if(res.data.status == 400) {
                         alert('This email ID is already registered with us');
+                        seven.hideIndicator();
                         return false;
                     }
                     if(res.data.status == 200) {
                         if( res.data.details.uthi_id ==  res.data.details.uthi_referrer ) {
                             localStorage.uthir_user = JSON.stringify(res.data.details);
                         } 
+                        seven.hideIndicator();
+
                         $location.path( "/app/donors" );
 
                     }
@@ -223,7 +284,7 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
                         res.data.details.uthi_lbd = new Date(res.data.details.uthi_lbd); 
                         res.data.details.uthi_dob = new Date(res.data.details.uthi_dob); 
                         $scope.donor = false; 
-                        if(parseInt(res.data.details['uthi_donor']) == 2)  $scope.donor = true; 
+                        if(parseInt(res.data.details['uthi_donor']) == 2 || parseInt(res.data.details['uthi_donor']) == 3)  $scope.donor = true; 
                         $scope.data = res.data.details;
 
                        if($scope.data.uthi_temp_state != "0") $scope.temp_districts = $scope.sd[parseInt($scope.data.uthi_temp_state) - 1].districts;

@@ -7,6 +7,24 @@
       font-size: 14px;
 }
 
+.badge {
+    background: #cd1910 !important;
+        font-size: 13px !important;
+}
+
+.list-block {
+margin: 0px !important;
+
+}
+
+.list-block .item-content {
+  padding-left:0px; 
+}
+
+.list-block .item-title
+{
+  padding-left: 12px;
+}
 </style>
 <div class="page">
   <div class="navbar">
@@ -24,7 +42,7 @@
 
   <div class="page-content">
 
-      <div ng-repeat="donor in donors" class="card donor-card list-block">
+      <!-- <div ng-repeat="donor in donors" class="card donor-card list-block">
           <div class="card-header item-inner">
             <div class="item-title">{{donor.uthi_name}} <span ng-if="data.uthi_id == donor.uthi_id">(Me)</span>  </div>
             <div class="item-after"><span class="badge bg-green">{{donor.blood_group}}</span></div>
@@ -41,10 +59,23 @@
             <a href="#/app/donor_edit/{{donor.uthi_id}}" class="button color-red btn-bld no-ripple"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
             <a href class="button color-red btn-bld no-ripple"> <i class="fa fa-search-plus" aria-hidden="true"></i> View</a>
           </div>
+      </div> -->
+
+
+      <div class="list-block">
+        <ul>
+          <li ng-repeat="donor in donors" >
+            <a href="#/app/donor_edit/{{donor.uthi_id}}" class="item-link item-content">
+              <div class="item-inner"> 
+                <div class="item-title">{{donor.uthi_name}} <span ng-if="data.uthi_id == donor.uthi_id">(Me)</span>  </div>
+                <div class="item-after"><span class="badge bg-green">{{donor.blood_group}}</span></div>
+
+
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
-
-
-
 
 
   </div>

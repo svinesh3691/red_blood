@@ -193,6 +193,23 @@
                   </li>
                   
                   
+                                    <li>
+                   <div class="item-content">
+                      <div class="item-media"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                      <div class="item-inner "> 
+                        <div class="item-title label">Current Availability</div>
+                        <div class="item-input item-input-field">
+                          <select  ng-model="data.uthi_donor">
+                            
+                            <option ng-repeat="s in uthi_donor_options" ng-selected="s.uthi_donor_options_id == data.uthi_donor"  value="{{s.uthi_donor_options_id}}">{{s.uthi_donor_options_value}}</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+
                   
                   
                   
