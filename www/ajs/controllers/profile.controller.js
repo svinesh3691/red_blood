@@ -17,6 +17,61 @@ app.controller('profile', ['$scope','seven','$state','services','$location',
 }]);
 
 
+
+// Change Password Controller
+app.controller('change_password', ['$scope','seven','$state','services','$location',
+    function ( $scope, seven, $state, services , $location) {
+            
+
+            $scope.d                = {};
+            $scope.d.current_pass   = "";
+            $scope.d.new_pass       = "";
+            $scope.d.repeat_pass    = "";
+
+            seven.hideIndicator();
+            $scope.data = JSON.parse(localStorage.uthir_user);
+            console.log($scope.data);
+
+            $scope.update = function() {
+                console.log($scope.d);
+                if($scope.d.current_pass == "" || $scope.d.new_pass == "" || $scope.d.repeat_pass == "" ) {
+                    alert("PLease fill all the fields!");
+                    return false
+                }
+                if($scope.data.uthi_password != $scope.d.current_pass) {
+                    alert('Your current password is wrong! PLease try again');
+                    return false;
+                }
+
+                if($scope.d.new_pass != $scope.d.repeat_pass) {
+                    alert("New password and Repeat passwords doesnot match ! ");
+                    return false;
+                }
+
+                if($scope.d.new_pass == $scope.d.current_pass) {
+                    alert("New password cannot be same as repeat password! ");
+                    return false;
+                }
+
+                services.master('uthiram/change_password',{'uthi_id': $scope.data.uthi_id,'uthi_password': $scope.d.new_pass}).then(function(res){
+                   
+                    if(res.data.status == 200 ) {
+                        seven.hideIndicator();
+
+
+                        alert("Password changed successfully!");
+                        localStorage.uthir_user = JSON.stringify(res.data.details);
+                        $location.path( "/app/profile" );
+
+
+                    }
+                })
+
+            }
+            
+}]);
+
+
 // Donors Controller
 app.controller('donors', ['$scope','seven','$state','services','$location',
     function ( $scope, seven, $state, services , $location) {

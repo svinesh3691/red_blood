@@ -103,6 +103,13 @@ app.config(['$stateProvider','$urlRouterProvider',
                   controller: 'profile_edit'
               })
 
+
+              .state('app.change_password', {
+                url: '/change_password',
+                  templateUrl: 'tpl/modules/profile/change_password.html',
+                  controller: 'change_password'
+              })
+
     }
   ]
 );

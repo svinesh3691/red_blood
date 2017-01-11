@@ -42,8 +42,9 @@ function onDeviceReady() {
             	var exit_confirm = confirm('Are you sure to exit app? ');
             	if(exit_confirm) navigator.app.exitApp();
             } else if (hash == "#/app/filter") {
-
-           		window.location.href = "#/app/donor_list";
+              window.location.href = "#/app/donor_list";
+            } else if (hash == "#/app/change_password") {
+           		window.location.href = "#/app/profile";
             } else {
            		window.location.href = "#/app/home";
 
