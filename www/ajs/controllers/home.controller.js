@@ -19,7 +19,8 @@ app.controller('home', ['$scope','seven','$state','services',
             } 
             console.log($scope.shw);
             console.log($scope.filter_bld_grp);
-            filter['start'] = 1;
+            var start = 0;
+            filter['start'] = 0;
             filter['limit'] = 3;
             services.master('uthiram/donors_search',filter).then(function(res){
                 seven.hideIndicator();
@@ -45,8 +46,9 @@ app.controller('home', ['$scope','seven','$state','services',
                 if($scope.getting) return false;
                 $scope.getting = true;
                 console.log('alb');
-                filter['start']++;
-                filter['start'] = filter['start'] * 2;
+                start++;
+                filter['start'] = start * 3;
+                console.log()
                 services.master('uthiram/donors_search',filter).then(function(res){
 
                     if(!res.data.donors) {

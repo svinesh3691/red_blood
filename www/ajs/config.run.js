@@ -16,7 +16,7 @@ app.config(['$controllerProvider','$compileProvider','$filterProvider','$provide
 /*Run Phase*/
 app.run(['$rootScope','$state','$stateParams','seven','services',
 function( $rootScope , $state , $stateParams , seven , services ) {
-
+        localStorage.appVers = "1.0.0";
         // Checking whether the User is authenticated and has a token
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
               if(localStorage.uthir_logged)     $rootScope.logged = true;
