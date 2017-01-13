@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.vintechnosys.redblood" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.vintechnosys.redblood" version="1.0.1">
   <name>Red Blood</name>
   <description>Blood donors search application.</description>
   <author href="http://vintechnosys.com" email="svinesh3691@gmail.com">S Vinesh</author>

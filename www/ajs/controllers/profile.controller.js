@@ -53,6 +53,12 @@ app.controller('change_password', ['$scope','seven','$state','services','$locati
                     return false;
                 }
 
+                var con = $scope.checkConnection();
+                if(!con) {
+                    seven.hideIndicator();
+                    return false;
+                }
+
                 services.master('uthiram/change_password',{'uthi_id': $scope.data.uthi_id,'uthi_password': $scope.d.new_pass}).then(function(res){
                    
                     if(res.data.status == 200 ) {
@@ -177,6 +183,11 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
                         return false;
                     }
                 }
+                var con = $scope.checkConnection();
+                if(!con) {
+                    seven.hideIndicator();
+                    return false;
+                }
 
 
                 services.master('uthiram/register_donor',$scope.data).then(function(res){
@@ -226,6 +237,11 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
             seven.showIndicator();
             $scope.data = {};
             $scope.sd = JSON.parse(localStorage.states);
+            var con = $scope.checkConnection();
+            if(!con) {
+                seven.hideIndicator();
+                return false;
+            }
 
             services.master('uthiram/edit_donor',{'id':$stateParams.Id}).then(function(res){
                     
@@ -328,7 +344,11 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
             var self = JSON.parse(localStorage.uthir_user);
             var my_id = self.uthi_id; 
             $scope.sd = JSON.parse(localStorage.states);
-
+            var con = $scope.checkConnection();
+            if(!con) {
+                seven.hideIndicator();
+                return false;
+            
 
             services.master('uthiram/edit_donor',{'id':my_id}).then(function(res){
                     

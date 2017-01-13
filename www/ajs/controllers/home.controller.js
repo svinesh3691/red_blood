@@ -23,7 +23,6 @@ app.controller('home', ['$scope','seven','$state','services',
             var con = $scope.checkConnection();
             if(!con) {
                 seven.hideIndicator();
-                
                 return false;
             }
             services.master('uthiram/donors_search',filter).then(function(res){
