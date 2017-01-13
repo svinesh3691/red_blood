@@ -9,6 +9,65 @@ app.controller('app', ['$scope','seven','$rootScope','services',
                   delete localStorage.uthir_user;
                   window.location.href="index.html";
             }
+
+            document.addEventListener("backbutton", function (e) {
+                  e.preventDefault();
+                  if($('.preloader-indicator-modal')[0] != undefined) {
+                        seven.hideIndicator();
+                        return false;
+                  }
+
+
+                   var hash = window.location.hash;
+
+                  if(hash == "#/app/profile_edit") {
+                        window.location.href = "#/app/profile";
+                  } else if(
+                        /#\/app\/donor_edit\/\d/g.test(hash)  || 
+                        /#\/app\/donor_registeration\/2\/\d/g.test(hash) ||  
+                        /#\/app\/donor_registeration\/3\/\d/g.test(hash)   
+                        ) {
+                        window.location.href = "#/app/donors";
+                  } else if( /#\/app\/donor_registeration\/1\/\d/g.test(hash) ) {
+                        window.location.href = "#/app/profile";
+                  } else if (hash == "#/app/home") {
+
+                        var exit_confirm = confirm('Are you sure to exit app? ');
+                        if(exit_confirm) navigator.app.exitApp();
+                  } else if (hash == "#/app/filter") {
+                    window.location.href = "#/app/donor_list";
+                  } else if (hash == "#/app/change_password") {
+                        window.location.href = "#/app/profile";
+                  } else {
+                        window.location.href = "#/app/home";
+
+                  }
+            });
+
+
+            $scope.checkConnection = function() {
+                if(navigator.connection.type == 'none' || navigator.connection.type == 'unknown') {
+                  alert('It seems you are not connected to the internet. Please turn on your data/wifi and try again!');
+                  return false;
+                } else {
+                  return true;
+                }
+
+
+                // return true;
+                // var states = {};
+                // states[Connection.UNKNOWN]  = 'Unknown connection';
+                // states[Connection.ETHERNET] = 'Ethernet connection';
+                // states[Connection.WIFI]     = 'WiFi connection';
+                // states[Connection.CELL_2G]  = 'Cell 2G connection';
+                // states[Connection.CELL_3G]  = 'Cell 3G connection';
+                // states[Connection.CELL_4G]  = 'Cell 4G connection';
+                // states[Connection.CELL]     = 'Cell generic connection';
+                // states[Connection.NONE]     = 'No network connection';
+
+                // alert('Connection type: ' + states[networkState]);
+            }
+
             
 }]);
 
@@ -39,7 +98,10 @@ app.controller('login', ['$scope','seven','$location','services',
        					$location.path( "/app/home" );
        				}
        			})
-       		}
+       		} else {
+                        seven.hideIndicator();
+
+                  }
        }
 
 

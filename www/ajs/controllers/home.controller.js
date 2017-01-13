@@ -12,16 +12,20 @@ app.controller('home', ['$scope','seven','$state','services',
             if(localStorage.filters) {
                 var filter = JSON.parse(localStorage.filters);
                 $scope.shw = true;
-            }
-            else{
+            } else {
                 $scope.shw = false;
                 filter = {};  
             } 
-            console.log($scope.shw);
-            console.log($scope.filter_bld_grp);
             var start = 0;
             filter['start'] = 0;
             filter['limit'] = 3;
+
+            var con = $scope.checkConnection();
+            if(!con) {
+                seven.hideIndicator();
+                
+                return false;
+            }
             services.master('uthiram/donors_search',filter).then(function(res){
                 seven.hideIndicator();
 
@@ -41,14 +45,11 @@ app.controller('home', ['$scope','seven','$state','services',
             }  
 
             $scope.getData = function(){
-                console.log('bla');
                 if($scope.completed) return false;
                 if($scope.getting) return false;
                 $scope.getting = true;
-                console.log('alb');
                 start++;
                 filter['start'] = start * 3;
-                console.log()
                 services.master('uthiram/donors_search',filter).then(function(res){
 
                     if(!res.data.donors) {
@@ -68,7 +69,7 @@ app.controller('home', ['$scope','seven','$state','services',
 
 
 
-// Home Controller
+// Filter Controller
 app.controller('filter', ['$scope','seven','$state','services','$location',
     function ( $scope, seven, $state, services, $location ) {
             $scope.sd = JSON.parse(localStorage.states);
