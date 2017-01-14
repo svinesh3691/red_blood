@@ -126,6 +126,9 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 
             if($stateParams.Flag==1) {
             	var self = JSON.parse(localStorage.uthir_user);
+                $scope.show_form = true;
+
+                console.log(self);
                 $scope.data.uthi_self = true;
                 $scope.data.uthi_referrer  = self.uthi_id;
             	$scope.data.uthi_id        = self.uthi_id;
@@ -165,7 +168,6 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
                 ];
             }  
             
-
 
             $scope.register = function(){
                 for(var k in $scope.data) {

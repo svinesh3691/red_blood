@@ -46,7 +46,7 @@ app.controller('app', ['$scope','seven','$rootScope','services',
 
 
             $scope.checkConnection = function() {
-              return true;
+              // return true;
                 if(navigator.connection.type == 'none' || navigator.connection.type == 'unknown') {
                   alert('It seems you are not connected to the internet. Please turn on your data/wifi and try again!');
                   return false;
