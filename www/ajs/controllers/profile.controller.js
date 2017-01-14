@@ -348,7 +348,7 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
             if(!con) {
                 seven.hideIndicator();
                 return false;
-            
+           }
 
             services.master('uthiram/edit_donor',{'id':my_id}).then(function(res){
                     

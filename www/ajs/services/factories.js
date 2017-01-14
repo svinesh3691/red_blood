@@ -19,5 +19,6 @@ app.factory("services", ['$http', function($http) {
     obj.master_get = function(func_name,post_data){
         return $http.get(serviceBase + func_name, post_data);
     }
-    return obj;   
+    return obj; 
+      
 }]);
