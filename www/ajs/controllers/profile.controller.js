@@ -82,7 +82,10 @@ app.controller('change_password', ['$scope','seven','$state','services','$locati
 app.controller('donors', ['$scope','seven','$state','services','$location',
     function ( $scope, seven, $state, services , $location) {
             
-            seven.hideIndicator();
+            var con = $scope.checkConnection();
+            if(!con) {
+                    return false;
+            }
 
             $scope.data = JSON.parse(localStorage.uthir_user);
             if($scope.data.uthi_activated == 0){
@@ -93,9 +96,12 @@ app.controller('donors', ['$scope','seven','$state','services','$location',
             else $scope.url_flag = 2; 
 
             var self = JSON.parse(localStorage.uthir_user);
+            
+            seven.showIndicator();
 
             services.master('uthiram/donors_by_me',{'referrer_id': self.uthi_id}).then(function(res){
                 $scope.donors =  res.data.donors;
+                seven.hideIndicator();
             })
             
 }]);
@@ -110,22 +116,8 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
             $scope.sd = JSON.parse(localStorage.states);
 
 
-            $scope.data = {};
-            $scope.data.uthi_self = false;
-            $scope.data.uthi_name = "";
-            $scope.data.uthi_mail = "";
-            $scope.data.uthi_phone_one = "";
-            $scope.data.uthi_phone_two = "";
-            $scope.data.uthi_gender = "";
-            $scope.data.uthi_blood_group = "";
-            $scope.data.uthi_dob = "";
-            $scope.data.uthi_lbd = "";
-            $scope.data.uthi_temp_state = "";
-            $scope.data.uthi_temp_dist = "";
-            $scope.data.uthi_perm_state = "";
-            $scope.data.uthi_perm_dist = "";
-            $scope.data.uthi_donor = "";
-
+            $scope.data = {};  $scope.data.uthi_self = false;
+            $scope.data.uthi_name = ""; $scope.data.uthi_mail = ""; $scope.data.uthi_phone_one = ""; $scope.data.uthi_phone_two = ""; $scope.data.uthi_gender = ""; $scope.data.uthi_blood_group = ""; $scope.data.uthi_dob = ""; $scope.data.uthi_lbd = ""; $scope.data.uthi_temp_state = ""; $scope.data.uthi_temp_dist = ""; $scope.data.uthi_perm_state = ""; $scope.data.uthi_perm_dist = ""; $scope.data.uthi_donor = ""; 
             $scope.show_form = false;
             $scope.show_options = false;
 
@@ -176,19 +168,22 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 
 
             $scope.register = function(){
-                seven.showIndicator();
                 for(var k in $scope.data) {
-                    if($scope.data[k] == "" && k != "uthi_self") {
-                        alert('All Fields are required!'); 
+                    if($scope.data[k] == "" && k != "uthi_self" && k != "uthi_lbd" && k!='uthi_phone_two' ) {
+                        alert('All fields marked as * are required!'); 
                         return false;
                     }
                 }
                 var con = $scope.checkConnection();
                 if(!con) {
-                    seven.hideIndicator();
                     return false;
                 }
 
+                seven.showIndicator();
+
+                if($scope.data.uthi_lbd == null) {
+                    $scope.data.uthi_lbd = "0000-00-00";
+                }
 
                 services.master('uthiram/register_donor',$scope.data).then(function(res){
                 seven.hideIndicator();
@@ -206,6 +201,9 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 
                         }
                     }
+                },function(res){
+                    seven.hideIndicator();
+                    alert("Something went wrong, Please try again");
                 });
 
             }
@@ -234,14 +232,11 @@ app.controller('donor_registeration', ['$scope','seven','$stateParams','services
 // Donor Edit Controller
 app.controller('donor_edit', ['$scope','seven','$stateParams','services','$location',
     function ( $scope, seven, $stateParams, services ,$location) {
-            seven.showIndicator();
             $scope.data = {};
             $scope.sd = JSON.parse(localStorage.states);
             var con = $scope.checkConnection();
-            if(!con) {
-                seven.hideIndicator();
-                return false;
-            }
+            if(!con) return false;
+            seven.showIndicator();
 
             services.master('uthiram/edit_donor',{'id':$stateParams.Id}).then(function(res){
                     
@@ -285,14 +280,18 @@ app.controller('donor_edit', ['$scope','seven','$stateParams','services','$locat
                         seven.hideIndicator();
 
                     }
-                });
+            },function(res){
+                seven.hideIndicator();
+                alert('Something went wrong, Please try again later!');
+                $location.path( "/app/home" );
+            });
 
 
 
             $scope.update = function(){
                 for(var k in $scope.data) {
-                    if($scope.data[k] == "" && k != "uthi_self" && k != "uthi_email" && k != "uthi_password") {
-                        alert('All Fields are required!'); 
+                    if($scope.data[k] == "" && k != "uthi_email" && k != "uthi_self" && k != "uthi_lbd" && k!='uthi_phone_two' && k != "uthi_password" ) {
+                        alert('All fields marked as * are required!'); 
                         return false;
                     }
                 }
@@ -370,16 +369,16 @@ app.controller('profile_edit', ['$scope','seven','$stateParams','services','$loc
 
             $scope.update = function(){
                 
+                for(var k in $scope.data) {
+                    if($scope.data[k] == "" && k != "uthi_email" && k != "uthi_self" && k != "uthi_lbd" && k!='uthi_phone_two' && k != "uthi_password" ) {
+                        alert('All fields marked as * are required!'); 
+                        return false;
+                    }
+                }
+
+
                 seven.showIndicator();
-                console.log($scope.data);
-                // for(var k in $scope.data) {
-                //     if($scope.data[k] == "" && k != "uthi_self" && k != "uthi_email" && k != "uthi_password") {
-                //         alert('All Fields are required!'); 
-                //         return false;
-                //     }
-                // }
-
-
+                
                 services.master('uthiram/update_profile',$scope.data).then(function(res){
                     if(res.data.status == 400) {
                         seven.hideIndicator();

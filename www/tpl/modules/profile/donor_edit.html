@@ -22,7 +22,7 @@
                     <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-name"></i></div>
                       <div class="item-inner"> 
-                        <div class="item-title label">Your name</div>
+                        <div class="item-title label">Your name*</div>
                         <div class="item-input item-input-field">
                           <input type="text" ng-model="data.uthi_name">
                         </div>
@@ -36,7 +36,7 @@
                     <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-email"></i></div>
                       <div class="item-inner"> 
-                        <div class="item-title label">E-mail</div>
+                        <div class="item-title label">E-mail*</div>
                         <div class="item-input item-input-field">
                           <input type="email" ng-model="data.uthi_mail">
                         </div>
@@ -48,7 +48,7 @@
                     <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-tel"></i></div>
                       <div class="item-inner"> 
-                        <div class="item-title label">Phone 1</div>
+                        <div class="item-title label">Phone 1*</div>
                         <div class="item-input item-input-field">
                           <input type="text" ng-model="data.uthi_phone_one">
                         </div>
@@ -74,7 +74,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-gender"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Gender</div>
+                        <div class="item-title label">Gender*</div>
                         <div class="item-input item-input-field">
                           <select ng-model="data.uthi_gender">
                             <option value="1">Male</option>
@@ -90,7 +90,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-url"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Blood Group</div>
+                        <div class="item-title label">Blood Group*</div>
                         <div class="item-input item-input-field">
                           <select ng-model="data.uthi_blood_group">
                             <option value="7">O +ive</option>
@@ -111,7 +111,7 @@
                     <div class="item-content">
                       <div class="item-media"><i class="icon icon-form-calendar"></i></div>
                       <div class="item-inner not-empty-state"> 
-                        <div class="item-title label">Birth date</div>
+                        <div class="item-title label">Birth date*</div>
                         <div class="item-input item-input-field not-empty-state">
                           <input type="date" placeholder="Birth day" ng-model="data.uthi_dob">
                         </div>
@@ -136,7 +136,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="fa fa-map-o" aria-hidden="true"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Temporary State</div>
+                        <div class="item-title label">Current State*</div>
                         <div class="item-input item-input-field" >
                           <select ng-change="loadTempDist()" ng-model="data.uthi_temp_state">
                             <option ng-repeat="s in sd" ng-selected="s.state_id == data.uthi_temp_state" value="{{s.state_id}}">{{s.state_name}}</option>
@@ -150,7 +150,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Temporary District</div>
+                        <div class="item-title label">Current District*</div>
                         <div class="item-input item-input-field">
                           <select  ng-model="data.uthi_temp_dist">
                             <option ng-repeat="s in temp_districts" ng-selected="s.dist_id == data.uthi_temp_dist"  value="{{s.dist_id}}">{{s.dist_name}}</option>
@@ -165,7 +165,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="fa fa-map-o" aria-hidden="true"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Permanent State</div>
+                        <div class="item-title label">Permanent State*</div>
                         <div class="item-input item-input-field">
                           <select ng-change="loadPermDist()" ng-model="data.uthi_perm_state">
                             <option ng-repeat="s in sd" ng-selected="s.state_id == data.uthi_perm_state"  value="{{s.state_id}}">{{s.state_name}}</option>
@@ -180,7 +180,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Permanent District</div>
+                        <div class="item-title label">Permanent District*</div>
                         <div class="item-input item-input-field">
                           <select  ng-model="data.uthi_perm_dist">
                             
@@ -197,7 +197,7 @@
                    <div class="item-content">
                       <div class="item-media"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                       <div class="item-inner "> 
-                        <div class="item-title label">Current Availability</div>
+                        <div class="item-title label">Current Availability*</div>
                         <div class="item-input item-input-field">
                           <select  ng-model="data.uthi_donor">
                             

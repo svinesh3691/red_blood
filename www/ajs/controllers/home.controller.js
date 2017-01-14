@@ -5,7 +5,6 @@ app.controller('home', ['$scope','seven','$state','services',
             $scope.completed    = false; 
             $scope.getting      = true; 
             $scope.spinner      = false; 
-            seven.showIndicator();
 			if(localStorage.uthir_user) {
 					$scope.data = JSON.parse(localStorage.uthir_user);
 			}
@@ -18,13 +17,12 @@ app.controller('home', ['$scope','seven','$state','services',
             } 
             var start = 0;
             filter['start'] = 0;
-            filter['limit'] = 3;
+            filter['limit'] = 6;
 
             var con = $scope.checkConnection();
-            if(!con) {
-                seven.hideIndicator();
-                return false;
-            }
+            if(!con) return false;
+            
+            seven.showIndicator();
             services.master('uthiram/donors_search',filter).then(function(res){
                 seven.hideIndicator();
 
@@ -48,7 +46,7 @@ app.controller('home', ['$scope','seven','$state','services',
                 if($scope.getting) return false;
                 $scope.getting = true;
                 start++;
-                filter['start'] = start * 3;
+                filter['start'] = start * 6;
                 services.master('uthiram/donors_search',filter).then(function(res){
 
                     if(!res.data.donors) {
